@@ -1,0 +1,42 @@
+#!/bin/bash
+
+#Colours
+greenColour="\e[0;32m\033[1m"
+endColour="\033[0m\e[0m"
+redColour="\e[0;31m\033[1m"
+blueColour="\e[0;34m\033[1m"
+yellowColour="\e[0;33m\033[1m"
+purpleColour="\e[0;35m\033[1m"
+turquoiseColour="\e[0;36m\033[1m"
+grayColour="\e[0;37m\033[1m"
+###################################
+
+ttl=$(ping -c1 $@ | grep "ttl" | awk '{print $6}' | tr -s 'ttl=' '\t' | tr -d '[[\t]]')
+
+
+
+	if [[ $ttl -le 64 && $ttl -ge 32 ]]; then
+
+		echo -e "\n#######################################"
+        	echo -e "\t${yellowColour}[*]${endColour} ${grayColour}IP = $@${endColour}"
+ 	        echo -e "\t${yellowColour}[*]${endColour} ${grayColour}TTL =${endColour}" ${redColour}$ttl${endColour}
+		echo -e "\t${greenColour}[*]${endColour} ${turquoiseColour}LINUX${endColour}"
+		echo -e "#######################################\n"
+
+	elif [[ $ttl -ge 65 && $ttl -le 128 ]]; then
+
+		echo -e "\n#######################################"
+                echo -e "\t${yellowColour}[*]${endColour} ${grayColour}IP = $@${endColour}"
+                echo -e "\t${yellowColour}[*]${endColour} ${grayColour}TTL =${endColour}" ${redColour}$ttl${endColour}
+		echo -e "\t${greenColour}[*]${endColour} ${turquoiseColour}WINDOWS${endColour}"
+		echo -e "#######################################\n"
+
+	else
+		echo -e "\n#######################################"
+                echo -e "\t${redColour}[*]${endColour} ${grayColour}IP = $@${endColour}"
+                echo -e "\t${redColour}[*]${endColour} ${grayColour}TTL = ¡¡¡NOT FOUND!!!${endColour}" ${redColour}$ttl${endColour}
+		echo -e "\t${redColour}[*]${endColour} ${redColour}¡¡¡NOT FOUND!!!${endColour}"
+                echo -e "#######################################\n"
+
+	fi
+

@@ -1,0 +1,15 @@
+function extractPorts(){
+
+        echo -e "\n${yellowColour}[*] Extracting Information..${endColour}\n"
+
+        ip_address=$(cat allPorts | grep -oP '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}' | sort -u)
+        open_ports=$(cat allPorts | grep -oP '\d{1,5}/open' | awk '{print $1}' FS="/" | xargs>
+
+        echo -e "\t${blueColour}[*]IP ADdress:${endColour}${grayColour} $ip_address ${endColo>
+        echo -e "\t${blueColour}[*]OPEN Ports:${endColour}${grayColour} $open_ports${endColou>
+
+        echo $open_ports | tr -d '\n' | xclip -sel clip
+
+        echo -e "${yellowColour}[*]PORTS has been copied to clipboard!${endColour}\n"
+
+}
