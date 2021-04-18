@@ -11,7 +11,7 @@ turquoiseColour="\e[0;36m\033[1m"
 grayColour="\e[0;37m\033[1m"
 ###################################
 
-ttl=$(ping -c1 $@ | grep "ttl" | awk '{print $6}' | tr -s 'ttl=' '\t' | tr -d '[[\t]]')
+ttl=$(ping -c1 $1 | grep "ttl" | awk '{print $6}' | tr -s 'ttl=' '\t' | tr -d '[[\t]]')
 
 
 
