@@ -1,0 +1,23 @@
+#!/bin/bash
+
+#Colours
+greenColour="\e[0;32m\033[1m"
+endColour="\033[0m\e[0m"
+redColour="\e[0;31m\033[1m"
+blueColour="\e[0;34m\033[1m"
+yellowColour="\e[0;33m\033[1m"
+purpleColour="\e[0;35m\033[1m"
+turquoiseColour="\e[0;36m\033[1m"
+grayColour="\e[0;37m\033[1m"
+###################################
+
+echo -e "\n${redColour}[!] MATANDO TODOS LOS PROCESOS SSH${endColour}"
+
+ps -ef | grep "ssh" | grep -E -v "grep|killssh.sh" | awk '{print $2}' | tr "\n" " " | xargs kill &>/dev/null
+sleep 1
+echo -e "${yellowColour}[*]${endColour} ${grayColour}TODOS LOS PROCESOS SSH HAN SIDO MATADOS${endColour}"
+sleep 1
+echo -e "${redColour}[!] PARANDO EL SERVICIO SSH ${endColour}"
+sudo systemctl stop ssh.service
+sleep 1
+echo -e "${yellowColour}[#]${endColour} ${grayColour}SERVICIO SSH PARADO POR SEGURIDAD${endColour}"
